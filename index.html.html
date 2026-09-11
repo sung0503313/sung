@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HACKING SYSTEM</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:#000;color:lime;font-family:Courier New,Consolas,monospace}
+*{box-sizing:border-box}
+.screen{position:absolute;inset:0;width:100%;height:100%}
+.writer{background:#fff;color:#000;text-align:center;overflow:auto;padding:20px}
+.writer h1{font-family:"Malgun Gothic",sans-serif;font-size:28px;margin:0 0 20px}
+.writer p{font-family:"Malgun Gothic",sans-serif;font-size:15px;line-height:1.65;text-align:left;max-width:750px;margin:20px auto;white-space:pre-line}
+button{background:#000;color:lime;border:1px solid lime;font-family:Courier New,Consolas,monospace;cursor:pointer}
+button:hover{background:#102010}
+.start-writer{font-family:"Malgun Gothic",sans-serif;color:#fff;font-size:15px;width:180px;height:45px;margin-top:10px}
+.info{padding:30px;overflow:auto}
+.info pre{font-size:13px;line-height:1.55;max-width:900px;margin:0 auto}
+.info-btn{display:block;margin:20px auto;width:220px;height:48px;font-size:16px}
+.game{padding:10px 20px}
+.game-title{text-align:center;font-size:28px;font-weight:bold;margin:25px 0}
+.log{display:block;width:min(900px,90vw);height:calc(100vh - 245px);margin:20px auto;background:#000;color:lime;border:1px solid #003300;resize:none;padding:12px;font:12px/1.45 Courier New,Consolas,monospace;white-space:pre-wrap;overflow:auto}
+.input-area{text-align:center}
+.password{background:#000;color:lime;border:1px solid lime;outline:none;font:22px Courier New,Consolas,monospace;width:250px;padding:8px;text-align:center}
+.access{display:block;width:150px;height:40px;margin:5px auto;font-size:14px}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:20}
+.modal{width:500px;min-height:280px;background:#000;border:1px solid lime;color:lime;padding:25px;text-align:center;box-shadow:0 0 15px rgba(0,255,0,.15)}
+.modal h2{font-size:17px;font-weight:normal;margin:0 0 30px}
+.modal p{font:13px/1.6 Courier New,Consolas,monospace;white-space:pre-line}
+.modal input{background:#000;color:lime;border:1px solid lime;outline:none;font:14px Courier New,Consolas,monospace;width:250px;padding:8px;text-align:center}
+.modal-buttons{display:flex;justify-content:center;gap:30px;margin-top:20px}
+.modal-buttons button{width:120px;height:36px}
+.clear{display:flex;align-items:center;justify-content:center;flex-direction:column}
+.clear h1{font-size:55px;margin:0 0 20px}
+.clear p{font-size:15px;color:#fff}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div id="writer" class="screen writer">
+  <h1>작가의 말</h1>
+  <p>우리는 매일 인터넷과 디지털 기기를 사용하며 수많은 정보를 남기고 있습니다. 검색 기록부터 사진, 계정 정보, 개인정보까지 우리가 생각하는 것보다 훨씬 많은 정보가 온라인에 저장되어 있습니다. 하지만 이러한 정보가 제대로 보호되지 않는다면 작은 보안 취약점 하나만으로도 큰 피해가 발생할 수 있습니다.
+
+이 게임을 통해 해킹과 정보보안에 대해 조금 더 쉽게 이해하고, 우리가 평소 아무렇지 않게 사용하는 개인정보와 데이터가 얼마나 중요한지 생각해보았으면 합니다. 보안은 전문가들만 신경 써야 하는 것이 아니라 인터넷을 사용하는 모든 사람이 관심을 가져야 하는 문제이기 때문입니다.
+
+또한 해킹 기술은 어떻게 사용하느냐에 따라 피해를 일으킬 수도 있고, 반대로 시스템의 취약점을 찾아 더 안전하게 만드는 데 사용될 수도 있습니다. 실제 정보보안 분야에서는 공격자의 입장에서 시스템을 분석하고 문제점을 찾아내는 과정도 중요합니다. 결국 중요한 것은 기술 자체가 아니라 그 기술을 어떤 목적으로 사용하고, 그 결과에 얼마나 책임을 지느냐라고 생각합니다.
+
+게임 속에서는 비밀번호 하나를 추측하는 것이 단순한 재미로 느껴질 수 있지만, 실제 상황에서는 하나의 계정이 개인의 소중한 정보나 기업의 중요한 자료와 연결되어 있을 수도 있습니다. 그렇기 때문에 강력한 비밀번호를 사용하고 개인정보를 함부로 공개하지 않는 등 작은 보안 습관부터 실천하는 것이 중요합니다.
+
+기술이 발전할수록 정보를 지키는 보안의 중요성도 함께 커집니다. 여러분이 이 게임을 재미있게 플레이하면서 해킹의 위험성과 정보보안의 필요성을 조금이나마 느끼고, 우리가 만들어가는 디지털 세상을 어떻게 안전하게 지켜나갈 수 있을지 한 번쯤 생각해보길 바랍니다.</p>
+  <button class="start-writer" onclick="showInfo()">게임 시작</button>
+</div>
+
+<div id="info" class="screen info hidden">
+<pre>[ MISSION BRIEFING ]
+
+당신은 기업 내부의 보안 시스템에 침투하여
+중요한 기밀 정보를 찾아내야 합니다.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ PLAY GUIDE ]
+
+• 각 스테이지마다 비밀번호를 추리합니다.
+
+• 비밀번호를 틀릴 때마다
+  새로운 힌트가 공개됩니다.
+
+• 입력한 숫자가 정답보다 작으면
+
+        ▲ UP
+
+• 입력한 숫자가 정답보다 크면
+
+        ▼ DOWN
+
+• 제한 횟수를 초과하면
+  SECURITY QUIZ가 시작됩니다.
+
+• 퀴즈를 3회 실패하면
+  처음부터 다시 시작할지 선택합니다.
+
+• 총 12회 이상 실패하면
+  다음 스테이지로 건너뛸 수 있습니다.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ STAGE ]
+
+직원 → 팀장 → 임원 → CEO
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+목표는 CEO 계정까지 침투하는 것입니다.
+
+행운을 빕니다.</pre>
+<button class="info-btn" onclick="startGame()">START HACKING</button>
+</div>
+
+<div id="game" class="screen game hidden">
+  <div class="game-title">💻 HACKING SYSTEM</div>
+  <div id="log" class="log"></div>
+  <div class="input-area">
+    <input id="entry" class="password" type="text" inputmode="numeric" autocomplete="off">
+    <button id="access" class="access" onclick="checkPassword()">ACCESS</button>
+  </div>
+</div>
+
+<div id="clear" class="screen clear hidden">
+  <h1>GAME CLEAR</h1>
+  <p>3초 후 게임이 종료됩니다.</p>
+</div>
+
+<div id="modalHost"></div>
+
+<script>
+const stages=[
+ {name:"직원",length:3,attempts:5},
+ {name:"팀장",length:3,attempts:4},
+ {name:"임원",length:4,attempts:3},
+ {name:"CEO",length:4,attempts:3}
+];
+
+let quizUsed=[];
+let currentStage=0;
+let attempts=0;
+let quizFail=0;
+let totalFail=0;
+let password="";
+let clues=[];
+let revealedHints=1;
+let popup=null;
+
+const quizzes=[
+["행운을 시험해봅시다! 1, 2, 3 중 택 1","2"],
+["조선의 21대 왕은?","영조"],
+["임진왜란이 일어난 해는?","1592"],
+["태양계에서 가장 큰 행성은?","목성"],
+["행운을 시험해봅시다! 제작자가 태어난 연도는? (숫자만)","2010"],
+["식물세포에 있고 동물세포에 없는 구조는?","세포벽"],
+["??은 이 당백전의 당을 된발음으로 땅으로하여 땅돈이라 한것에서 비롯되었는데, 당백전 가치가 형편 없다는 뜻이었다. ??은? ","땡전"],
+["넌센스 : 눈이 좋은 사슴을 영어로?\n(띄어쓰기X)","굿아이디어"],
+["최초의 한글 소설은?","홍길동전"],
+["오늘날 표준이 되는 피아노의 건반 개수는 몇 개? (숫자만)","88"],
+["스승의 날인 5월 15일은 누구의 생일에서 유래했을까?","세종대왕"],
+["학교폭력 상담 전화번호는?","117"],
+["덧셈, 뺄샘, 곱셈, 나눗셈의 네 종류의 계산법을 뭐라고 하는가?","사칙연산"],
+["이탈리아의 수도는?","로마"],
+["'남산 위에 저 소나무 ㅇㅇ을 두른듯~'\n다음은 애국가의 2절 가사이다. 빈칸에 들어갈 단어는?","철갑"],
+["나이아가라 폭포는 어느 나라에 있을까요?","캐나다"],
+["아기돼지 삼형제에서 둘째 돼지가 지은 집은 무엇일까요?","나무집"],
+["한자 冬(동)은 무슨 뜻일까요?","겨울"],
+["이 프로그램은 무슨 컴퓨터언어로 만들어졌을까요?","파이썬"],
+["대한민국의 수도는?","서울"],
+["지구에서 가장 큰 대양은?","태평양"],
+["1년은 몇 개월인가?","12"],
+["우리나라의 국기는?","태극기"],
+["물의 끓는점은 섭씨 몇 도인가?","100"],
+["태양계에서 가장 큰 행성은?","목성"],
+["무지개의 색은 몇 가지인가?","7"],
+["한글을 만든 왕은?","세종대왕"],
+["지구의 위성은?","달"],
+["대한민국의 화폐 단위는?","원"],
+["세계에서 가장 높은 산은?","에베레스트"],
+["사람의 심장은 몇 개인가?","1"],
+["삼각형의 변은 몇 개인가?","3"],
+["우리나라의 국화는?","무궁화"],
+["태양은 무엇인가?","항성"],
+["1시간은 몇 분인가?","60"],
+["지구는 태양 주위를 도는 데 약 며칠이 걸리는가?","365"],
+["영어 알파벳은 모두 몇 글자인가?","26"]
+];
+
+const $=id=>document.getElementById(id);
+function hide(id){$(id).classList.add("hidden")}
+function show(id){$(id).classList.remove("hidden")}
+
+function showInfo(){hide("writer");show("info")}
+
+function generatePassword(length){
+ let p="";
+ for(let i=0;i<length;i++)p+=Math.floor(Math.random()*10);
+ return p;
+}
+
+function generateClues(pw){
+ let result=[];
+ result.push(`숫자의 합은 ${[...pw].reduce((a,b)=>a+Number(b),0)}이다.`);
+ if(Number(pw[0])>Number(pw[pw.length-1]))
+   result.push("첫 번째 숫자가 마지막 숫자보다 크다.");
+ else
+   result.push("첫 번째 숫자가 마지막 숫자보다 작거나 같다.");
+ let evenCount=0;
+ for(const n of pw)if(Number(n)%2===0)evenCount++;
+ result.push(`짝수는 ${evenCount}개 포함되어 있다.`);
+ const digit=pw[Math.floor(Math.random()*pw.length)];
+ result.push(`${digit}이라는 숫자가 포함되어 있다.`);
+ result.push(`(강력한 힌트) 앞자리는 ${pw.slice(0,Math.floor(pw.length/2))}이다.`);
+ return result;
+}
+
+function clearLog(){ $("log").textContent="" }
+function logMessage(msg){$("log").textContent+=msg+"\n";$("log").scrollTop=$("log").scrollHeight}
+
+function startGame(){hide("info");show("game");startStage();setTimeout(()=>$("entry").focus(),200)}
+
+function startStage(){
+ password=generatePassword(stages[currentStage].length);
+ attempts=0;
+ totalFail=0;
+ revealedHints=1;
+ clues=generateClues(password);
+ clearLog();
+ const stage=stages[currentStage];
+
+ logMessage("==========================================");
+ logMessage(`[ MISSION ] ${stage.name} 계정 침투`);
+ logMessage("==========================================");
+ logMessage("");
+ logMessage(`[INFO] 비밀번호 길이 : ${stage.length}자리`);
+ logMessage(`[INFO] 제한 횟수 : ${stage.attempts}회`);
+ logMessage("");
+ logMessage("[ CLUE 01 ]");
+ logMessage("▶ "+clues[0]);
+ logMessage("");
+ logMessage("[TIP] 숫자가 정답보다 작으면 UP");
+ logMessage("[TIP] 숫자가 정답보다 크면 DOWN");
+ logMessage("");
+ logMessage("[SYSTEM] 비밀번호를 입력하십시오.");
+ $("entry").disabled=false;$("access").disabled=false;$("entry").value="";
+ $("entry").removeAttribute("maxlength");$("entry").focus();
+}
+
+function nextStage(){
+ currentStage++;
+ if(currentStage>=stages.length)endingSuccess();
+ else startStage();
+}
+
+function checkPassword(){
+ const stage=stages[currentStage];
+ const entry=$("entry");
+ const userInput=entry.value.trim();
+ entry.value="";
+
+ if(userInput===""){logMessage("⚠ 숫자를 입력하십시오.");entry.focus();return}
+ if(!/^\d+$/.test(userInput)){logMessage("⚠ 숫자만 입력할 수 있습니다.");entry.focus();return}
+
+ if(userInput==="0000"){
+  logMessage("");
+  logMessage("🔓 MASTER CODE DETECTED");
+  logMessage("⚠ 관리자 우회 코드 확인");
+  logMessage("✅ ACCESS GRANTED");
+  nextStage();return;
+ }
+
+ attempts++;
+ totalFail++;
+
+ if(userInput===password){
+  logMessage("");
+  logMessage("✅ ACCESS GRANTED");
+  logMessage(`[SYSTEM] ${stage.name} 계정 침투 성공`);
+  nextStage();return;
+ }
+
+ logMessage("");
+ logMessage(`❌ ACCESS DENIED (${attempts}/${stage.attempts})`);
+
+ const userNumber=Number(userInput),correctNumber=Number(password);
+ if(userNumber<correctNumber){
+  logMessage("⬆ UP");
+  logMessage("▶ 정답이 입력한 숫자보다 큽니다.");
+ }else{
+  logMessage("⬇ DOWN");
+  logMessage("▶ 정답이 입력한 숫자보다 작습니다.");
+ }
+
+ if(revealedHints<clues.length){
+  logMessage("");
+  logMessage("💡 새로운 힌트 공개!");
+  logMessage("▶ "+clues[revealedHints]);
+  revealedHints++;
+ }
+
+ if(totalFail>=12 && currentStage!==3){askSkip();return}
+
+ if(attempts>=stage.attempts){
+  logMessage("");
+  logMessage("🔒 ACCOUNT LOCKED");
+  logMessage("추가 인증이 필요합니다.");
+  entry.disabled=true;$("access").disabled=true;
+  openQuiz();
+ }
+}
+
+function makeModal(inner){
+ const back=document.createElement("div");back.className="modal-back";
+ const box=document.createElement("div");box.className="modal";box.innerHTML=inner;
+ back.appendChild(box);$("modalHost").appendChild(back);
+ popup=back;return back;
+}
+function closeModal(){if(popup){popup.remove();popup=null}}
+
+function askSkip(){
+ if(popup)return;
+ makeModal(`<h2>⚠ SYSTEM WARNING ⚠</h2>
+ <p>실패 횟수가 너무 많습니다.
+
+다음 스테이지로 넘어가시겠습니까?</p>
+ <div class="modal-buttons"><button id="skipYes">YES</button><button id="skipNo">NO</button></div>`);
+ $("skipYes").onclick=()=>{closeModal();totalFail=0;nextStage()};
+ $("skipNo").onclick=()=>{
+  closeModal();
+  logMessage("");
+  logMessage("💡 추가 힌트를 제공합니다.");
+  if(revealedHints<clues.length){logMessage("▶ "+clues[revealedHints]);revealedHints++}
+  else logMessage("💡 더 이상 공개할 힌트가 없습니다.");
+  $("entry").disabled=false;$("access").disabled=false;$("entry").focus();
+ };
+}
+
+function openQuiz(){
+ quizFail=0;
+ const unused=quizzes.filter(q=>!quizUsed.includes(q));
+ if(unused.length===0){quizUsed=[]}
+ const pool=quizzes.filter(q=>!quizUsed.includes(q));
+ const quiz=pool[Math.floor(Math.random()*pool.length)];
+ quizUsed.push(quiz);
+ const question=quiz[0],answer=quiz[1];
+
+ const m=makeModal(`<h2>[ SECURITY QUIZ ]</h2>
+ <p>${escapeHtml(question)}</p>
+ <input id="answerEntry" type="text" autocomplete="off">
+ <br><button id="verify" style="margin-top:15px;width:120px;height:35px">VERIFY</button>`);
+ $("answerEntry").focus();
+
+ function verify(){
+  const userAnswer=$("answerEntry").value.trim().toLowerCase();
+  if(userAnswer===answer.toLowerCase()){
+   logMessage("");
+   logMessage("✅ SECURITY QUIZ PASSED");
+   logMessage("🔓 ACCOUNT UNLOCKED");
+   closeModal();
+   $("entry").disabled=false;$("access").disabled=false;$("entry").focus();
+   return;
+  }
+  quizFail++;
+  logMessage(`❌ 인증 실패 (${quizFail}/3)`);
+  $("answerEntry").value="";
+  if(quizFail===2)logMessage("⚠ 마지막 기회입니다.");
+  if(quizFail>=3){closeModal();openRetryPopup()}
+  else $("answerEntry").focus();
+ }
+ $("verify").onclick=verify;
+ $("answerEntry").addEventListener("keydown",e=>{if(e.key==="Enter")verify()});
+}
+
+function openRetryPopup(){
+ makeModal(`<h2>⚠ AUTHENTICATION FAILED ⚠</h2>
+ <p>인증에 3회 실패했습니다.
+
+처음부터 다시 시작하시겠습니까?</p>
+ <div class="modal-buttons"><button id="retryYes">YES</button><button id="retryNo">NO</button></div>`);
+ $("retryYes").onclick=()=>{closeModal();resetGame()};
+ $("retryNo").onclick=()=>{closeModal();document.body.innerHTML=""};
+}
+
+function resetGame(){
+ currentStage=0;attempts=0;quizFail=0;totalFail=0;quizUsed=[];
+ startStage();
+}
+
+function endingSuccess(){
+ clearLog();
+ $("entry").disabled=true;$("access").disabled=true;
+ logMessage("==========================================");
+ logMessage("[ ACCESS GRANTED ]");
+ logMessage("==========================================");
+ logMessage("");
+ logMessage("[DATA DOWNLOADING...]");
+ setTimeout(()=>logMessage("[NEWS] 회사 기밀 유출 발생"),1000);
+ setTimeout(()=>logMessage("[REPORT] 회사 내부 정보 대량 유출"),2000);
+ setTimeout(()=>logMessage("[REPORT] 회사 파산 위기"),3000);
+ setTimeout(()=>logMessage("이번엔... 어떤 정보를 털어볼까?"),4500);
+ setTimeout(showClearScreen,6500);
+}
+
+function showClearScreen(){
+ hide("game");show("clear");
+ setTimeout(()=>{document.body.innerHTML=""},3000);
+}
+
+function escapeHtml(s){
+ return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+$("entry").addEventListener("keydown",e=>{if(e.key==="Enter")checkPassword()});
+</script>
+</body>
+</html>
